@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_134105) do
+ActiveRecord::Schema.define(version: 2022_03_14_024816) do
 
   create_table "tales", charset: "utf8mb4", force: :cascade do |t|
     t.string "content"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
     t.index ["user_id"], name: "index_tales_on_user_id"
   end
 

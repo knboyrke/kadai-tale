@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+#global_navi {
+    margin-bottom: 16px;
+}
+
+#global_navi #a_navi {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    column-gap: 1px;
+}
+
+#global_navi #a_navi {
+    width: 163px;
+    text-align: center;
+}
+
+#global_navi #a_navi {
+    display: block;
+    padding: 10px 16px;
+    background-color: #f0573e;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color .2s linear;
+}
+/*
+#global_navi ul li.current a {
+    background-color: #fa9786;
+}*/
+
+#global_navi #a_navi:hover {
+    background-color: #fa9786;
+}
