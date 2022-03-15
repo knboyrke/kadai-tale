@@ -1,9 +1,10 @@
 class TalesController < ApplicationController
   
-  before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :require_user_logged_in, only: [:new, :create, :edit, :update, :destroy, :edit, :update]
+  before_action :correct_user, only: [:destroy, :edit, :update]
   
   def index
+    redirect_to root_url
   end
   
   def show
@@ -11,6 +12,7 @@ class TalesController < ApplicationController
   end
   
   def edit
+    @tale = Tale.find(params[:id])
   end
   
   def new
@@ -33,6 +35,29 @@ class TalesController < ApplicationController
     @tale.destroy
     flash[:success] = 'おはなしを削除しました。'
     redirect_back(fallback_location: root_path)
+  end
+  
+  def update
+    @tale = Tale.find(params[:id])
+
+    if @tale.update(tale_params)
+      flash[:success] = 'おはなしは正常に更新されました'
+      redirect_to @tale
+    else
+      flash.now[:danger] = 'おはなしは更新されませんでした'
+      render :edit
+    end
+  end
+  
+  def rank
+    @pagy, @tales = pagy(Tale.order(id: :desc), items:10)
+    @tale_like_ranks = Tale.find(Favorite.group(:tale_id).order('count(tale_id) desc').pluck(:tale_id))
+  end
+  
+  def search
+    @tales = Tale.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "search"
   end
   
   private

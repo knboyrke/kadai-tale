@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="search-form">
+      <%= form_with url: tales_search_path, method: :get, local: true do |f| %>
+        <div class="mb-3">
+          <%= f.label :title, 'タイトル検索' %>
+          <%= f.text_field :keyword, value: @keyword, placeholder: "キーワードを入力してください", class: 'form-control' %>
+        </div>
+        <%= f.submit '検索', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <div class="tale-list">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>タイトル</th>
+            <th>作者</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tales.sort_by {|tale| tale.id }.each do |tale| %>
+            <tr>
+              <td><%= link_to tale.title, tale %></td>
+              <td><%= link_to tale.user.name, tale.user %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

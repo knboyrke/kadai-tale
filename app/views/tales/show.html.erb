@@ -1,5 +1,20 @@
-<h3>タイトル: <%= @tale.title %></h3>
+<h3 style="text-align:center"><%= safe_join(@tale.title.split("\n"),tag(:br)) %></h3>
 
 <br>
+
+<% if logged_in? %>
+  <div style="text-align:right">
+    <%= render 'favorites/like_button', tale: @tale %>
+  </div>
+  
+  <br>
+  
+  <div style="text-align:right">
+    <% if current_user == @tale.user %>
+      <%= link_to '編集', edit_tale_path(@tale) %>
+      <br>
+    <% end %>
+  </div>
+<% end %>
 
 <p><%= safe_join(@tale.content.split("\n"),tag(:br))%></p>

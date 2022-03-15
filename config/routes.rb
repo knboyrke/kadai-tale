@@ -10,11 +10,18 @@ Rails.application.routes.draw do
     member do
       get :followings
       get :followers
+      get :likes
     end
   end
 
-  resources :tales, only: [:index, :edit, :show, :new, :create, :destroy]
+
+  get 'tales/rank', to: 'tales#rank'
+  get 'tales/search', to: 'tales#search'
+  post 'tales/search', to: 'tales#search'
+  
+  resources :tales
+  
+  
   resources :relationships, only: [:create, :destroy]
-  
-  
+  resources :favorites, only: [:create, :destroy]
 end
