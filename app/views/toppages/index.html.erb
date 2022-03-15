@@ -4,7 +4,6 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>id</th>
         <th>タイトル</th>
         <th>作者</th>
       </tr>
@@ -12,9 +11,8 @@
     <tbody>
       <% @tales.each do |tale| %>
         <tr>
-          <td><%= link_to tale.id, tale %></td>
-          <td><%= tale.title %></td>
-          <td><%= tale.content %></td>
+          <td><%= link_to tale.title, tale %></td>
+          <td><%= link_to tale.user.name, tale.user %></td>
         </tr>
       <% end %>
     </tbody>
@@ -22,4 +20,10 @@
   <div>
     <%== pagy_bootstrap_nav(@pagy) %>
   </div>
+<% end %>
+
+<% if logged_in? %>
+  <%= link_to '投稿へ', new_tale_path, class: "btn btn-primary" %>
+<% else %>
+  <%= link_to '投稿へ', login_path, class: "btn btn-primary" %>
 <% end %>

@@ -8,7 +8,7 @@
             <%= link_to tale.user.name, user_path(tale.user), class: "text-decoration-none" %> <span class="text-muted">posted at <%= tale.created_at %></span>
           </div>
           <div>
-            <p><%= tale.content %></p>
+            <p><%= tale.title %></p>
           </div>
           <div>
             <% if current_user == tale.user %>

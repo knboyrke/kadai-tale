@@ -1,0 +1,5 @@
+<h3>タイトル: <%= @tale.title %></h3>
+
+<br>
+
+<p><%= safe_join(@tale.content.split("\n"),tag(:br))%></p>

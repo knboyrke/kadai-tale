@@ -1,0 +1,23 @@
+<%= form_with(model: tale) do |f| %>
+  <% if tale.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% tale.errors.full_messages.each do |tl| %>
+          <li><%= tl %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="mb-3">
+  <%= f.label :title, 'タイトル' %>
+  <%= f.text_area :title, placeholder: "タイトルを入力してください", class: 'form-control', rows: 1 %>
+  </div>
+
+  <div class="mb-3">
+  <%= f.label :content, '本文' %>
+  <%= f.text_area :content, placeholder: "本文を入力してください", class: 'form-control', rows: 5 %>
+  </div>
+
+  <%= f.submit '投稿' %>
+<% end %>

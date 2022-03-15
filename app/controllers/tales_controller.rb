@@ -3,6 +3,20 @@ class TalesController < ApplicationController
   before_action :require_user_logged_in
   before_action :correct_user, only: [:destroy]
   
+  def index
+  end
+  
+  def show
+    @tale = Tale.find(params[:id])
+  end
+  
+  def edit
+  end
+  
+  def new
+    @tale = Tale.new
+  end  
+    
   def create
     @tale = current_user.tales.build(tale_params)
     if @tale.save
@@ -11,7 +25,7 @@ class TalesController < ApplicationController
     else
       @pagy, @tales = pagy(current_user.tales.order(id: :desc))
       flash.now[:danger] = 'おはなしの投稿に失敗しました。'
-      render 'toppages/index'
+      render :new 
     end
   end
 
@@ -24,7 +38,7 @@ class TalesController < ApplicationController
   private
 
   def tale_params
-    params.require(:tale).permit(:content)
+    params.require(:tale).permit(:title, :content)
   end
   
   def correct_user
